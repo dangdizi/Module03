@@ -7,15 +7,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // khai báo danh sách nhân viên
-       String[][] listEmployee = new String[0][7];
-        // String[][] listEmployee = {
-        //         {"NV001", "Nguyễn Văn A", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
-        //         {"NV002", "Nguyễn Văn B", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
-        //         {"NV003", "Nguyễn Văn C", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
-        //         {"NV004", "Nguyễn Văn F", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
-        //         {"NV005", "Nguyễn Văn D", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
-        //         {"NV006", "Nguyễn Văn O", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"}
-        // };
+//        String[][] listEmployee = new String[0][7];
+        String[][] listEmployee = {
+                {"NV001", "Nguyễn Văn A", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
+                {"NV002", "Nguyễn Văn B", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
+                {"NV003", "Nguyễn Văn C", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
+                {"NV004", "Nguyễn Văn F", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
+                {"NV005", "Nguyễn Văn D", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"},
+                {"NV006", "Nguyễn Văn O", "21/04/2003", "Hà Nam, Hà Nội", "0789424036", "7000000", "3.2"}
+        };
         String[] listTitle = {"Mã NV", "Tên NV", "Ngày sinh", "Địa chỉ", "SĐT", "Lương cơ bản", "HS năng suất"};
         String Id;
         Scanner sc = new Scanner(System.in);
@@ -147,13 +147,13 @@ public class Main {
                     break;
                 case 7:
                     // sắp xếp theo tên
-                    String[][] sortAZ = Arrays.copyOf(listEmployee, listEmployee.length);
-                    String[] cache1 = {};
+                    String[][] sortAZ = Arrays.copyOf(listEmployee, listEmployee.length); // tạo mảng clone
+                    String[] cache1 = {}; // mảng trung gian để sắp xếp các hàng
                     for (int i = 0; i < sortAZ.length; i++) {
-                        String name1 = String.valueOf(sortAZ[i][1].charAt(sortAZ[i][1].lastIndexOf(" ") + 1));
-                        System.out.println(name1);
+                        String name1 = String.valueOf(sortAZ[i][1].charAt(sortAZ[i][1].lastIndexOf(" ") + 1)); // kí tự đầu tiên của tên
+
                         for (int j = i + 1; j < sortAZ.length; j++) {
-                            String name2 = String.valueOf(sortAZ[j][1].charAt(sortAZ[j][1].lastIndexOf(" ") + 1));
+                            String name2 = String.valueOf(sortAZ[j][1].charAt(sortAZ[j][1].lastIndexOf(" ") + 1)); // kí tự đầu tiên của tên
                             if (name1.compareTo(name2) > 0) {
                                 cache1 = sortAZ[j];
                                 sortAZ[j] = sortAZ[i];
@@ -162,11 +162,26 @@ public class Main {
                         }
                     }
 
+                    // duyệt mảng hiển thị thông tin nhân viên
+                    System.out.println("                                                 DANH SÁCH NHÂN VIÊN                                        ");
+                    System.out.println("-".repeat(108));
+                    System.out.println("| Mã NV  | Tên NV           | Ngày sinh   | Địa chỉ         | SĐT            | Lương cơ bản | HS năng suất |");
+                    System.out.println("-".repeat(108));
                     for (int i = 0; i < sortAZ.length; i++) {
-                        System.out.println(sortAZ[i][1]);
+                        System.out.printf("| %-5s  | %-16s | %-11s | %-15s | %-14s | %-12s | %-12s |\n",
+                                sortAZ[i][0],
+                                sortAZ[i][1],
+                                sortAZ[i][2],
+                                sortAZ[i][3],
+                                sortAZ[i][4],
+                                sortAZ[i][5] + " Đ",
+                                sortAZ[i][6]
+                        );
+                        System.out.println("-".repeat(108));
                     }
-
+                    System.out.println();
                     break;
+
                 case 8:
                     System.out.println("Đã thoát chương trình");
                     return;
